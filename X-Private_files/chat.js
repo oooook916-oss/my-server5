@@ -1,29 +1,30 @@
 (function () {
   'use strict';
 
+  // Your Render Server URL
   const CHAT_WS = 'wss://my-server5.onrender.com/chat';
 
   const css = `
     .ogx-chat {
       position: fixed; left: 20px; bottom: 20px; width: 350px; height: 250px;
       background: rgba(0, 0, 0, 0.85); border: 1px solid #444; border-radius: 8px;
-      color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff; font-family: sans-serif;
       display: flex; flex-direction: column; z-index: 1000000;
       box-shadow: 0 4px 15px rgba(0,0,0,0.5); overflow: hidden;
     }
     .ogx-chat-header {
       background: #222; padding: 8px 12px; font-size: 12px; font-weight: bold;
-      border-bottom: 1px solid #333; text-transform: uppercase; letter-spacing: 1px;
+      border-bottom: 1px solid #333; text-transform: uppercase;
     }
     .ogx-chat-messages {
-      flex: 1; overflow-y: auto; padding: 10px; font-size: 13px; line-height: 1.4;
+      flex: 1; overflow-y: auto; padding: 10px; font-size: 13px;
     }
     .ogx-chat-input-area {
       display: flex; padding: 10px; background: #111; border-top: 1px solid #333;
     }
     .ogx-chat-input-area input {
       flex: 1; background: #252525; border: 1px solid #444; color: #fff;
-      padding: 8px 12px; border-radius: 20px; outline: none; font-size: 13px;
+      padding: 8px 12px; border-radius: 20px; outline: none;
     }
     .ogx-chat-msg { margin-bottom: 4px; }
     .ogx-chat-msg b { color: #00d4ff; }
@@ -40,7 +41,7 @@
     <div class="ogx-chat-header">Server Chat</div>
     <div class="ogx-chat-messages" id="chatLog"></div>
     <div class="ogx-chat-input-area">
-      <input type="text" id="chatInput" placeholder="Type message and press Enter..." autocomplete="off">
+      <input type="text" id="chatInput" placeholder="Type message..." autocomplete="off">
     </div>
   `;
   document.body.appendChild(chatContainer);
@@ -65,6 +66,7 @@
     ws = new WebSocket(CHAT_WS);
 
     ws.onopen = () => {
+      logEl.innerHTML = ''; // Clear logs on new connection
       addLog(null, 'Connected to Server', true);
     };
 
