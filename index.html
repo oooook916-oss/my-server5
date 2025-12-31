@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Private Game Server</title>
-  <link rel="stylesheet" href="./X-Private_files/main.css">
-  <link rel="stylesheet" href="./X-Private_files/all.min.css">
-  <link rel="stylesheet" href="./X-Private_files/toastr.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Game Server</title>
+    <link rel="stylesheet" href="./X-Private_files/main.css">
+    <link rel="stylesheet" href="./X-Private_files/toastr.min.css">
+    <style>
+        body, html { margin: 0; padding: 0; overflow: hidden; background: #000; }
+        #game-display { width: 100vw; height: 100vh; display: block; }
+        #overlay {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10; text-align: center;
+        }
+        input { padding: 10px; border-radius: 5px; border: none; }
+        button { padding: 10px 20px; cursor: pointer; background: #00d4ff; border: none; border-radius: 5px; font-weight: bold; }
+    </style>
 </head>
 <body>
-  <canvas id="game-display" width="1920" height="1080"></canvas>
-  <div id="menu-display">
-    <input id="nickname" placeholder="Nickname">
-    <button id="play">Play</button>
-  </div>
 
-  <script src="./X-Private_files/jquery.min.js"></script>
-  <script src="./X-Private_files/toastr.min.js"></script>
-  <script src="./X-Private_files/main.bundle.js"></script>
-  <script src="./X-Private_files/chat.js"></script>
+    <div id="overlay">
+        <input id="nickname" type="text" placeholder="Enter Nickname" maxlength="15">
+        <button id="play-btn">PLAY</button>
+    </div>
+
+    <canvas id="game-display"></canvas>
+
+    <script src="./X-Private_files/jquery.min.js"></script>
+    <script src="./X-Private_files/main.bundle.js"></script>
+
+    <script>
+        // Game Logic Connector
+        const playBtn = document.getElementById('play-btn');
+        const overlay = document.getElementById('overlay');
+        
+        playBtn.onclick = function() {
+            const nick = document.getElementById('nickname').value;
+            // This connects the game to your Render server
+            if (window.core && typeof window.core.connect === 'function') {
+                window.core.connect('wss://my-server5.onrender.com');
+                overlay.style.display = 'none';
+            } else {
+                alert('Game engine still loading... please wait.');
+            }
+        };
+    </script>
 </body>
 </html>
