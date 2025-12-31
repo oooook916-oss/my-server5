@@ -4,43 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Private Game Server</title>
-
   <link rel="stylesheet" href="./X-Private_files/main.css">
   <link rel="stylesheet" href="./X-Private_files/all.min.css">
   <link rel="stylesheet" href="./X-Private_files/toastr.min.css">
-
-  <style>
-    /* Chat UI Styles */
-    .ogx-chat {
-      position: fixed; left: 12px; bottom: 30px; width: 360px; height: 240px; 
-      display: flex; flex-direction: column; background: rgba(10, 10, 10, .40); 
-      border: 1px solid rgba(255, 255, 255, .1); border-radius: 12px; 
-      color: #fff; font: 12px/1.4 system-ui; z-index: 2147483647;
-    }
-  </style>
 </head>
 <body>
-  
-  <canvas id="game-display" width="1920" height="965"></canvas>
-
+  <canvas id="game-display" width="1920" height="1080"></canvas>
   <div id="menu-display">
-    <div class="player-inputs">
-      <input id="nickname" class="form-control" placeholder="Nickname">
-      <button id="play" class="btn-play">Play Now</button>
-    </div>
-    
-    <div class="server-select">
-      <select id="servers">
-        <option value="wss://eu.senpa.io:2001/">[EU FFA] Nemesis</option>
-      </select>
-    </div>
+    <input id="nickname" placeholder="Nickname">
+    <button id="play">Play</button>
   </div>
 
   <script src="./X-Private_files/jquery.min.js"></script>
   <script src="./X-Private_files/toastr.min.js"></script>
-  <script src="./X-Private_files/gifler.min.js"></script>
   <script src="./X-Private_files/main.bundle.js"></script>
   <script src="./X-Private_files/chat.js"></script>
-
 </body>
 </html>
